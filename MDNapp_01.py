@@ -2,6 +2,28 @@ import streamlit as st
 from datetime import datetime
 import pandas as pd
 
+
+def check_password():
+    if "password_correct" not in st.session_state:
+        st.markdown("<h2 style='text-align: center;'>🔒 Είσοδος</h2>", unsafe_allow_html=True)
+        pwd = st.text_input("Δώστε τον κωδικό πρόσβασης", type="password")
+        if st.button("Είσοδος"):
+            if pwd == "2026": # <--- ΑΥΤΟΣ ΕΙΝΑΙ Ο ΚΩΔΙΚΟΣ ΣΟΥ
+                st.session_state["password_correct"] = True
+                st.rerun()
+            else:
+                st.error("❌ Λάθος κωδικός")
+        return False
+    return True
+
+if not check_password():
+    st.stop()
+
+
+
+
+
+
 # 1. Ρυθμίσεις Σελίδας για Mobile
 st.set_page_config(
     page_title="Price Analyzer 2026",
