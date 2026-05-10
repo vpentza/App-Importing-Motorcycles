@@ -1,14 +1,14 @@
 import streamlit as st
 from datetime import datetime
 import pandas as pd
-
+import urllib.parse
 
 def check_password():
     if "password_correct" not in st.session_state:
         st.markdown("<h2 style='text-align: center;'>🔒 Είσοδος</h2>", unsafe_allow_html=True)
         pwd = st.text_input("Δώστε τον κωδικό πρόσβασης", type="password")
         if st.button("Είσοδος"):
-            if pwd == "2026": # <--- ΑΥΤΟΣ ΕΙΝΑΙ Ο ΚΩΔΙΚΟΣ ΣΟΥ
+            if pwd == "2026":
                 st.session_state["password_correct"] = True
                 st.rerun()
             else:
@@ -19,19 +19,14 @@ def check_password():
 if not check_password():
     st.stop()
 
-
-
-
-
-
-# 1. Ρυθμίσεις Σελίδας για Mobile
+# 1. Ρυθμίσεις Σελίδας
 st.set_page_config(
     page_title="Price Analyzer 2026",
     page_icon="📊",
     layout="centered"
 )
 
-# 2. Custom CSS για iOS Look & Feel
+# 2. Custom CSS
 st.markdown("""
     <style>
     .stApp { background-color: #f4f4f4; }
@@ -46,7 +41,6 @@ st.markdown("""
         border: none;
         box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
     }
-    .stButton>button:active { background-color: #2980b9; }
     .main-price {
         font-size: 42px !important;
         font-weight: bold;
@@ -58,13 +52,12 @@ st.markdown("""
         margin: 10px 0;
         border: 1px solid #d5d8dc;
     }
-    /* Απόκρυψη του menu του Streamlit για πιο καθαρό App look */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
-# 3. Πλήρης Βάση Δεδομένων (db)
+# 3. Βάση Δεδομένων
 db = {
     "5.000": ["12.364", "6.683", "54,05%", "2.641", "21,36%", "802", "6,49%", "2.238", "18,10%"],
     "5.500": ["13.022", "7.167", "55,04%", "2.641", "20,28%", "860", "6,60%", "2.354", "18,08%"],
@@ -118,20 +111,15 @@ db = {
 st.markdown("<h2 style='text-align: center; color: #2c3e50;'>📊 Price Analyzer</h2>", unsafe_allow_html=True)
 st.write("---")
 
-# Έλεγχος Ημερομηνίας
 if datetime.now() > datetime(2026, 12, 24):
     st.error("System Error: Insert Coins to continue")
 else:
-    # Επιλογή Ποσού
     option = st.selectbox("Τιμή αγγελίας σε λίρες (£)", list(db.keys()))
 
     if st.button("ΑΝΑΛΥΣΗ ΤΙΜΗΣ"):
         v = db[option]
-        
-        # Εμφάνιση Τελικής Τιμής
         st.markdown(f'<div class="main-price">{v[0]} €</div>', unsafe_allow_html=True)
         
-        # Πίνακας Ανάλυσης
         analysis_data = {
             "Κατηγορία": ["🇬🇧 UK", "🇬🇷 GR", "⚖️ Τέλη Ταξ", "🧾 ΦΠΑ"],
             "Ποσό (€)": [v[1], v[3], v[5], v[7]],
@@ -139,7 +127,6 @@ else:
         }
         st.table(pd.DataFrame(analysis_data))
         
-        # Κείμενο για Share
         report = (f"📊 *REPORT ANALYZER 2026*\n"
                   f"--------------------------\n"
                   f"💷 Price GBP: {option} £\n"
@@ -150,18 +137,15 @@ else:
                   f"⚖️ Tax: {v[5]} ({v[6]})\n"
                   f"🧾 VAT: {v[7]} ({v[8]})")
         
-        
-# κώδικας ωστε να κανεις copy και μετα να ανοιγεις εσυ οποιο social θες, ισως βολευει
         st.info("💡 Αντιγράψτε το παρακάτω για κοινοποίηση:")
         st.code(report, language="markdown")
-#
+
         # --- ΣΥΣΤΗΜΑ SHARE ΓΙΑ MOBILE ---
-        import urllib.parse
         share_text = urllib.parse.quote(report)
+        subject_email = urllib.parse.quote("MDN motorcycles Ανάλυση τιμής εισαγωγής απο GB")
         
         st.markdown("### 📲 Κοινοποίηση σε Social")
         
-        # Πρώτη γραμμή: WhatsApp & Viber (Αυτόματο κείμενο)
         col1, col2 = st.columns(2)
         with col1:
             st.markdown(f'''<a href="https://wa.me{share_text}" target="_blank" style="text-decoration:none;">
@@ -172,7 +156,6 @@ else:
                 <div style="background-color:#7360f2;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div>
                 </a>''', unsafe_allow_html=True)
 
-        # Δεύτερη γραμμή: Messenger & Instagram (Άνοιγμα εφαρμογής)
         col3, col4 = st.columns(2)
         with col3:
             st.markdown(f'''<a href="fb-messenger://share" target="_blank" style="text-decoration:none;">
@@ -183,19 +166,11 @@ else:
                 <div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📸 Instagram</div>
                 </a>''', unsafe_allow_html=True)
 
-        # Γραμμή 3: Email (Πλήρες πλάτος)
         st.markdown(f'''<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;">
-            <div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📧 Αποστολή με Email</div>
+            <div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:10px;">📧 Αποστολή με Email</div>
             </a>''', unsafe_allow_html=True)
-
-
-
 
         st.caption("Σημείωση: Στο Messenger & Instagram θα χρειαστεί να κάνετε 'Επικόλληση' το κείμενο που αντιγράψατε.")
 
-
-
-
 st.write("---")
-st.caption(f"Build: 2026.Web.1.2 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
-
+st.caption(f"Build: 2026.Web.1.6 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
