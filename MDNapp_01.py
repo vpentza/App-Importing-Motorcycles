@@ -21,8 +21,13 @@ if not check_password():
 
 st.set_page_config(page_title="Price Analyzer 2026", page_icon="📊", layout="centered")
 
-# --- CSS ΓΙΑ DARK MODE & ΚΕΙΜΕΝΑ ---
+# --- NO-CACHE & CSS FIX ΓΙΑ DARK MODE & IPHONE ---
 st.markdown("""
+    <head>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+    </head>
     <style>
     .stApp { background-color: #f4f4f4; }
     h1, h2, h3, h4, p, span, label { color: #2c3e50 !important; }
@@ -53,7 +58,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Η ΠΛΗΡΗΣ ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ ΟΠΩΣ ΤΗΝ ΑΝΕΒΑΣΑΤΕ
 db = {
     "5.000": ["12.364", "6.683", "54,05%", "2.641", "21,36%", "802", "6,49%", "2.238", "18,10%"],
     "5.500": ["13.022", "7.167", "55,04%", "2.641", "20,28%", "860", "6,60%", "2.354", "18,08%"],
@@ -156,4 +160,4 @@ else:
         st.markdown(f'<a href="{email_url}" style="text-decoration:none;"><div style="background-color:#ea4335;color:white !important;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:5px;">📧 Αποστολή με Email</div></a>', unsafe_allow_html=True)
 
 st.write("---")
-st.caption(f"Build: 2026.Web.2.2 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+st.caption(f"Build: 2026.Web.2.3 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
