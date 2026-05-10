@@ -19,45 +19,18 @@ def check_password():
 if not check_password():
     st.stop()
 
-# 1. Ρυθμίσεις Σελίδας
-st.set_page_config(
-    page_title="Price Analyzer 2026",
-    page_icon="📊",
-    layout="centered"
-)
+st.set_page_config(page_title="Price Analyzer 2026", page_icon="📊", layout="centered")
 
-# 2. Custom CSS
 st.markdown("""
     <style>
     .stApp { background-color: #f4f4f4; }
-    [data-testid="stMetricValue"] { font-size: 40px; color: #2c3e50; }
-    .stButton>button {
-        width: 100%;
-        border-radius: 12px;
-        height: 3.5em;
-        background-color: #3498db;
-        color: white;
-        font-weight: bold;
-        border: none;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    }
-    .main-price {
-        font-size: 42px !important;
-        font-weight: bold;
-        color: #2c3e50;
-        text-align: center;
-        background: white;
-        border-radius: 15px;
-        padding: 15px;
-        margin: 10px 0;
-        border: 1px solid #d5d8dc;
-    }
+    .stButton>button { width: 100%; border-radius: 12px; height: 3.5em; background-color: #3498db; color: white; font-weight: bold; }
+    .main-price { font-size: 42px !important; font-weight: bold; color: #2c3e50; text-align: center; background: white; border-radius: 15px; padding: 15px; margin: 10px 0; border: 1px solid #d5d8dc; }
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
-# 3. Βάση Δεδομένων
 db = {
     "5.000": ["12.364", "6.683", "54,05%", "2.641", "21,36%", "802", "6,49%", "2.238", "18,10%"],
     "5.500": ["13.022", "7.167", "55,04%", "2.641", "20,28%", "860", "6,60%", "2.354", "18,08%"],
@@ -107,7 +80,6 @@ db = {
     "20.000": ["33.879", "22.503", "66,42%", "2.641", "7,80%", "2.700", "7,97%", "6.035", "17,81%"]
 }
 
-# 4. Κεντρικό UI
 st.markdown("<h2 style='text-align: center; color: #2c3e50;'>📊 Price Analyzer</h2>", unsafe_allow_html=True)
 st.write("---")
 
@@ -140,37 +112,24 @@ else:
         st.info("💡 Αντιγράψτε το παρακάτω για κοινοποίηση:")
         st.code(report, language="markdown")
 
-        # --- ΣΥΣΤΗΜΑ SHARE ΓΙΑ MOBILE ---
         share_text = urllib.parse.quote(report)
-        subject_email = urllib.parse.quote("MDN motorcycles Ανάλυση τιμής εισαγωγής απο GB")
+        subject_email = urllib.parse.quote("MDN motorcycles Ανάλυση τιμής")
         
-        st.markdown("### 📲 Κοινοποίηση σε Social")
+        st.markdown("### 📲 Κοινοποίηση")
         
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown(f'''<a href="https://wa.me{share_text}" target="_blank" style="text-decoration:none;">
-                <div style="background-color:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div>
-                </a>''', unsafe_allow_html=True)
-        with col2:
-            st.markdown(f'''<a href="viber://forward?text={share_text}" target="_blank" style="text-decoration:none;">
-                <div style="background-color:#7360f2;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div>
-                </a>''', unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown(f'<a href="https://wa.me{share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div></a>', unsafe_allow_html=True)
+        with c2:
+            st.markdown(f'<a href="viber://forward?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#7360f2;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div></a>', unsafe_allow_html=True)
 
-        col3, col4 = st.columns(2)
-        with col3:
-            st.markdown(f'''<a href="fb-messenger://share" target="_blank" style="text-decoration:none;">
-                <div style="background-color:#0084FF;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">🔵 Messenger</div>
-                </a>''', unsafe_allow_html=True)
-        with col4:
-            st.markdown(f'''<a href="instagram://library" target="_blank" style="text-decoration:none;">
-                <div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📸 Instagram</div>
-                </a>''', unsafe_allow_html=True)
+        c3, c4 = st.columns(2)
+        with c3:
+            st.markdown(f'<a href="fb-messenger://share" target="_blank" style="text-decoration:none;"><div style="background-color:#0084FF;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">🔵 Messenger</div></a>', unsafe_allow_html=True)
+        with c4:
+            st.markdown(f'<a href="instagram://library" target="_blank" style="text-decoration:none;"><div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📸 Instagram</div></a>', unsafe_allow_html=True)
 
-        st.markdown(f'''<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;">
-            <div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:10px;">📧 Αποστολή με Email</div>
-            </a>''', unsafe_allow_html=True)
-
-        st.caption("Σημείωση: Στο Messenger & Instagram θα χρειαστεί να κάνετε 'Επικόλληση' το κείμενο που αντιγράψατε.")
+        st.markdown(f'<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:5px;">📧 Email</div></a>', unsafe_allow_html=True)
 
 st.write("---")
-st.caption(f"Build: 2026.Web.1.6 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+st.caption(f"Build: 2026.Web.1.7 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
