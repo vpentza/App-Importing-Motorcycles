@@ -150,8 +150,51 @@ else:
                   f"⚖️ Tax: {v[5]} ({v[6]})\n"
                   f"🧾 VAT: {v[7]} ({v[8]})")
         
+        
+# κώδικας ωστε να κανεις copy και μετα να ανοιγεις εσυ οποιο social θες, ισως βολευει
         st.info("💡 Αντιγράψτε το παρακάτω για κοινοποίηση:")
         st.code(report, language="markdown")
+#
+        # --- ΣΥΣΤΗΜΑ SHARE ΓΙΑ MOBILE ---
+        import urllib.parse
+        share_text = urllib.parse.quote(report)
+        
+        st.markdown("### 📲 Κοινοποίηση σε Social")
+        
+        # Πρώτη γραμμή: WhatsApp & Viber (Αυτόματο κείμενο)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f'''<a href="https://wa.me{share_text}" target="_blank" style="text-decoration:none;">
+                <div style="background-color:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div>
+                </a>''', unsafe_allow_html=True)
+        with col2:
+            st.markdown(f'''<a href="viber://forward?text={share_text}" target="_blank" style="text-decoration:none;">
+                <div style="background-color:#7360f2;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div>
+                </a>''', unsafe_allow_html=True)
+
+        # Δεύτερη γραμμή: Messenger & Instagram (Άνοιγμα εφαρμογής)
+        col3, col4 = st.columns(2)
+        with col3:
+            st.markdown(f'''<a href="fb-messenger://share" target="_blank" style="text-decoration:none;">
+                <div style="background-color:#0084FF;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">🔵 Messenger</div>
+                </a>''', unsafe_allow_html=True)
+        with col4:
+            st.markdown(f'''<a href="instagram://library" target="_blank" style="text-decoration:none;">
+                <div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📸 Instagram</div>
+                </a>''', unsafe_allow_html=True)
+
+        # Γραμμή 3: Email (Πλήρες πλάτος)
+        st.markdown(f'''<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;">
+            <div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📧 Αποστολή με Email</div>
+            </a>''', unsafe_allow_html=True)
+
+
+
+
+        st.caption("Σημείωση: Στο Messenger & Instagram θα χρειαστεί να κάνετε 'Επικόλληση' το κείμενο που αντιγράψατε.")
+
+
+
 
 st.write("---")
 st.caption(f"Build: 2026.Web.1.2 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
