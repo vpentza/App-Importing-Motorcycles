@@ -21,9 +21,13 @@ if not check_password():
 
 st.set_page_config(page_title="Price Analyzer 2026", page_icon="📊", layout="centered")
 
+# FIX ΓΙΑ DARK MODE ΚΑΙ ΠΙΝΑΚΕΣ
 st.markdown("""
     <style>
     .stApp { background-color: #f4f4f4; }
+    table { color: black !important; background-color: white !important; }
+    th { color: black !important; background-color: #eeeeee !important; }
+    td { color: black !important; }
     .stButton>button { width: 100%; border-radius: 12px; height: 3.5em; background-color: #3498db; color: white; font-weight: bold; }
     .main-price { font-size: 42px !important; font-weight: bold; color: #2c3e50; text-align: center; background: white; border-radius: 15px; padding: 15px; margin: 10px 0; border: 1px solid #d5d8dc; }
     #MainMenu {visibility: hidden;}
@@ -49,34 +53,6 @@ db = {
     "9.600": ["18.566", "11.244", "60,56%", "2.641", "14,22%", "1.349", "7,27%", "3.332", "17,95%"],
     "9.800": ["18.860", "11.460", "60,76%", "2.641", "14,00%", "1.375", "7,29%", "3.384", "17,94%"],
     "10.000": ["19.155", "11.677", "60,96%", "2.641", "13,79%", "1.401", "7,31%", "3.436", "17,94%"],
-    "10.200": ["19.449", "11.893", "61,15%", "2.641", "13,58%", "1.427", "7,34%", "3.488", "17,93%"],
-    "10.400": ["19.744", "12.110", "61,34%", "2.641", "13,38%", "1.453", "7,36%", "3.540", "17,93%"],
-    "10.600": ["20.038", "12.326", "61,51%", "2.641", "13,18%", "1.479", "7,38%", "3.592", "17,93%"],
-    "10.800": ["20.333", "12.543", "61,69%", "2.641", "12,99%", "1.505", "7,40%", "3.644", "17,92%"],
-    "11.000": ["20.627", "12.759", "61,86%", "2.641", "12,80%", "1.531", "7,42%", "3.696", "17,92%"],
-    "11.200": ["20.922", "12.976", "62,02%", "2.641", "12,62%", "1.557", "7,44%", "3.748", "17,91%"],
-    "11.400": ["21.216", "13.192", "62,18%", "2.641", "12,45%", "1.583", "7,46%", "3.800", "17,91%"],
-    "11.600": ["21.511", "13.409", "62,34%", "2.641", "12,28%", "1.609", "7,48%", "3.852", "17,91%"],
-    "11.800": ["21.805", "13.625", "62,49%", "2.641", "12,11%", "1.635", "7,50%", "3.904", "17,90%"],
-    "12.000": ["22.100", "13.842", "62,63%", "2.641", "11,95%", "1.661", "7,52%", "3.956", "17,90%"],
-    "12.200": ["22.395", "14.059", "62,78%", "2.641", "11,79%", "1.687", "7,53%", "4.008", "17,90%"],
-    "12.400": ["22.689", "14.275", "62,92%", "2.641", "11,64%", "1.713", "7,55%", "4.060", "17,89%"],
-    "12.600": ["22.984", "14.492", "63,05%", "2.641", "11,49%", "1.739", "7,57%", "4.112", "17,89%"],
-    "12.800": ["23.278", "14.708", "63,18%", "2.641", "11,35%", "1.765", "7,58%", "4.164", "17,89%"],
-    "13.000": ["23.573", "14.925", "63,31%", "2.641", "11,20%", "1.791", "7,60%", "4.216", "17,88%"],
-    "13.500": ["24.309", "15.466", "63,62%", "2.641", "10,86%", "1.856", "7,64%", "4.346", "17,88%"],
-    "14.000": ["25.045", "16.007", "63,91%", "2.641", "10,55%", "1.921", "7,67%", "4.476", "17,87%"],
-    "14.500": ["25.782", "16.549", "64,19%", "2.641", "10,24%", "1.986", "7,70%", "4.606", "17,87%"],
-    "15.000": ["26.517", "17.090", "64,45%", "2.641", "9,96%", "2.051", "7,73%", "4.735", "17,86%"],
-    "15.500": ["27.253", "17.631", "64,69%", "2.641", "9,69%", "2.116", "7,76%", "4.865", "17,85%"],
-    "16.000": ["27.990", "18.173", "64,93%", "2.641", "9,44%", "2.181", "7,79%", "4.995", "17,85%"],
-    "16.500": ["28.726", "18.714", "65,15%", "2.641", "9,19%", "2.246", "7,82%", "5.125", "17,84%"],
-    "17.000": ["29.462", "19.255", "65,36%", "2.641", "8,96%", "2.311", "7,84%", "5.255", "17,84%"],
-    "17.500": ["30.199", "19.797", "65,56%", "2.641", "8,75%", "2.376", "7,87%", "5.385", "17,83%"],
-    "18.000": ["30.935", "20.338", "65,74%", "2.641", "8,54%", "2.441", "7,89%", "5.515", "17,83%"],
-    "18.500": ["31.671", "20.879", "65,92%", "2.641", "8,34%", "2.506", "7,91%", "5.645", "17,82%"],
-    "19.000": ["32.407", "21.421", "66,10%", "2.641", "8,15%", "2.570", "7,93%", "5.775", "17,82%"],
-    "19.500": ["33.143", "21.962", "66,26%", "2.641", "7,97%", "2.635", "7,95%", "5.905", "17,82%"],
     "20.000": ["33.879", "22.503", "66,42%", "2.641", "7,80%", "2.700", "7,97%", "6.035", "17,81%"]
 }
 
@@ -119,17 +95,18 @@ else:
         
         c1, c2 = st.columns(2)
         with c1:
-            st.markdown(f'<a href="https://wa.me{share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div></a>', unsafe_allow_html=True)
+            # ΔΙΟΡΘΩΜΕΝΟ WHATSAPP LINK
+            st.markdown(f'<a href="whatsapp://send?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div></a>', unsafe_allow_html=True)
         with c2:
             st.markdown(f'<a href="viber://forward?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#7360f2;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div></a>', unsafe_allow_html=True)
 
         c3, c4 = st.columns(2)
         with c3:
-            st.markdown(f'<a href="fb-messenger://share" target="_blank" style="text-decoration:none;"><div style="background-color:#0084FF;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">🔵 Messenger</div></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="fb-messenger://share" target="_blank" style="text-decoration:none;"><div style="background-color:#0084FF;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🔵 Messenger</div></a>', unsafe_allow_html=True)
         with c4:
-            st.markdown(f'<a href="instagram://library" target="_blank" style="text-decoration:none;"><div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;">📸 Instagram</div></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="instagram://library" target="_blank" style="text-decoration:none;"><div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">📸 Instagram</div></a>', unsafe_allow_html=True)
 
         st.markdown(f'<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:5px;">📧 Email</div></a>', unsafe_allow_html=True)
 
 st.write("---")
-st.caption(f"Build: 2026.Web.1.7 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+st.caption(f"Build: 2026.Web.1.9 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
