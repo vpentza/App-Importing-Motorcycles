@@ -5,7 +5,7 @@ import urllib.parse
 
 def check_password():
     if "password_correct" not in st.session_state:
-        st.markdown("<h2 style='text-align: center;'>🔒 Είσοδος</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #2c3e50;'>🔒 Είσοδος</h2>", unsafe_allow_html=True)
         pwd = st.text_input("Δώστε τον κωδικό πρόσβασης", type="password")
         if st.button("Είσοδος"):
             if pwd == "2026":
@@ -21,15 +21,43 @@ if not check_password():
 
 st.set_page_config(page_title="Price Analyzer 2026", page_icon="📊", layout="centered")
 
-# FIX ΓΙΑ DARK MODE ΚΑΙ ΠΙΝΑΚΕΣ
+# --- ΠΛΗΡΗΣ ΔΙΟΡΘΩΣΗ ΓΙΑ DARK MODE & ΚΕΙΜΕΝΑ ---
 st.markdown("""
     <style>
+    /* Φόντο εφαρμογής */
     .stApp { background-color: #f4f4f4; }
+    
+    /* Επιβολή χρωμάτων σε όλα τα κείμενα για να φαίνονται σε Dark Mode */
+    h1, h2, h3, h4, p, span, label { color: #2c3e50 !important; }
+    
+    /* Ρυθμίσεις Πίνακα: Μαύρα γράμματα σε άσπρο φόντο πάντα */
     table { color: black !important; background-color: white !important; }
     th { color: black !important; background-color: #eeeeee !important; }
-    td { color: black !important; }
-    .stButton>button { width: 100%; border-radius: 12px; height: 3.5em; background-color: #3498db; color: white; font-weight: bold; }
-    .main-price { font-size: 42px !important; font-weight: bold; color: #2c3e50; text-align: center; background: white; border-radius: 15px; padding: 15px; margin: 10px 0; border: 1px solid #d5d8dc; }
+    td { color: black !important; background-color: white !important; }
+    
+    /* Κεντρική Τιμή */
+    .main-price { 
+        font-size: 42px !important; 
+        font-weight: bold; 
+        color: #2c3e50 !important; 
+        text-align: center; 
+        background: white; 
+        border-radius: 15px; 
+        padding: 15px; 
+        margin: 10px 0; 
+        border: 1px solid #d5d8dc; 
+    }
+    
+    /* Κουμπί Ανάλυσης */
+    .stButton>button { 
+        width: 100%; 
+        border-radius: 12px; 
+        height: 3.5em; 
+        background-color: #3498db; 
+        color: white !important; 
+        font-weight: bold; 
+    }
+    
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     </style>
@@ -85,28 +113,29 @@ else:
                   f"⚖️ Tax: {v[5]} ({v[6]})\n"
                   f"🧾 VAT: {v[7]} ({v[8]})")
         
-        st.info("💡 Αντιγράψτε το παρακάτω για κοινοποίηση:")
+        st.markdown("<h4 style='color: #2c3e50 !important; margin-top:20px;'>💡 Αντιγράψτε το παρακάτω:</h4>", unsafe_allow_html=True)
         st.code(report, language="markdown")
 
         share_text = urllib.parse.quote(report)
         subject_email = urllib.parse.quote("MDN motorcycles Ανάλυση τιμής")
         
-        st.markdown("### 📲 Κοινοποίηση")
+        # Ο ΤΙΤΛΟΣ ΠΟΥ ΘΑ ΦΑΙΝΕΤΑΙ ΠΑΝΤΑ
+        st.markdown("<h3 style='color: #2c3e50 !important; margin-top:25px;'>📲 Κοινοποίηση</h3>", unsafe_allow_html=True)
         
         c1, c2 = st.columns(2)
         with c1:
-            # ΔΙΟΡΘΩΜΕΝΟ WHATSAPP LINK
-            st.markdown(f'<a href="whatsapp://send?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div></a>', unsafe_allow_html=True)
+            # ΣΤΑΘΕΡΟ LINK ΓΙΑ WHATSAPP ΣΕ IPHONE
+            st.markdown(f'<a href="whatsapp://send?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#25D366;color:white !important;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟢 WhatsApp</div></a>', unsafe_allow_html=True)
         with c2:
-            st.markdown(f'<a href="viber://forward?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#7360f2;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="viber://forward?text={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#7360f2;color:white !important;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🟣 Viber</div></a>', unsafe_allow_html=True)
 
         c3, c4 = st.columns(2)
         with c3:
-            st.markdown(f'<a href="fb-messenger://share" target="_blank" style="text-decoration:none;"><div style="background-color:#0084FF;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🔵 Messenger</div></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="fb-messenger://share" target="_blank" style="text-decoration:none;"><div style="background-color:#0084FF;color:white !important;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">🔵 Messenger</div></a>', unsafe_allow_html=True)
         with c4:
-            st.markdown(f'<a href="instagram://library" target="_blank" style="text-decoration:none;"><div style="background-color:#E1306C;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">📸 Instagram</div></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="instagram://library" target="_blank" style="text-decoration:none;"><div style="background-color:#E1306C;color:white !important;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-bottom:10px;">📸 Instagram</div></a>', unsafe_allow_html=True)
 
-        st.markdown(f'<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#ea4335;color:white;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:5px;">📧 Email</div></a>', unsafe_allow_html=True)
+        st.markdown(f'<a href="mailto:?subject={subject_email}&body={share_text}" target="_blank" style="text-decoration:none;"><div style="background-color:#ea4335;color:white !important;padding:12px;border-radius:12px;text-align:center;font-weight:bold;margin-top:5px;">📧 Email</div></a>', unsafe_allow_html=True)
 
 st.write("---")
-st.caption(f"Build: 2026.Web.1.9 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+st.caption(f"Build: 2026.Web.2.0 | {datetime.now().strftime('%d/%m/%Y %H:%M')}")
