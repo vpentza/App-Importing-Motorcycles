@@ -103,15 +103,15 @@ else:
         }
         st.table(pd.DataFrame(analysis_data))
         
-        report = (f"📊 *REPORT ANALYZER 2026*\n"
+        report = (f"📊 *Ανάλυση Τιμής Προσφοράς*\n"
                   f"--------------------------\n"
                   f"💷 Price GBP: {option} £\n"
                   f"💶 Final Price: {v[0]} €\n"
                   f"--------------------------\n"
-                  f"🇬🇧 UK: {v[1]} ({v[2]})\n"
-                  f"🇬🇷 GR: {v[3]} ({v[4]})\n"
-                  f"⚖️ Tax: {v[5]} ({v[6]})\n"
-                  f"🧾 VAT: {v[7]} ({v[8]})")
+                  f"🇬🇧 UK €: {v[1]} ({v[2]})\n"
+                  f"🇬🇷 GR €: {v[3]} ({v[4]})\n"
+                  f"⚖️Tax €: {v[5]} ({v[6]})\n"
+                  f"🧾 VAT €: {v[7]} ({v[8]})")
         
         st.markdown("<h4 style='color: #2c3e50 !important; margin-top:20px;'>💡 Αντιγράψτε το παρακάτω:</h4>", unsafe_allow_html=True)
         st.code(report, language="markdown")
